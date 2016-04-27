@@ -18,7 +18,6 @@ Storage.prototype.add = function(name) {
 Storage.prototype.removeitem = function(id) {
     this.items.forEach(function(item) {
         if (item.id === parseInt(id, 10)) {
-            console.log(item);
             var index = storage.items.indexOf(item);
             storage.items.splice(index, 1);
         }
@@ -26,12 +25,9 @@ Storage.prototype.removeitem = function(id) {
 };
 
 Storage.prototype.editItem = function(requestObj) {
-    console.log("Edit item method argument: ", requestObj);
     this.items.forEach(function(item) {
         if (item.id === requestObj.id) {
-            console.log("Storage Item Before: ", item);
             item.name = requestObj.name;
-            console.log("Storage Item After: ", item);
         }
     });
 
@@ -67,7 +63,6 @@ app.delete('/items/:id', function(req, res) {
 });
 
 app.put('/items/:id', jsonParser, function(req, res) {
-    console.log("Request Body: ", req.body);
     storage.editItem(req.body);
     res.status(200);
 });
