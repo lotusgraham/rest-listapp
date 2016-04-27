@@ -15,6 +15,17 @@ Storage.prototype.add = function(name) {
     return item;
 };
 
+Storage.prototype.removeitem = function (id){
+    this.items.forEach(function(item){
+        if (item.id === parseInt(id, 10)) {
+            console.log(item);
+            var index = storage.items.indexOf(item);
+
+            storage.items.splice(index, 1);
+        }
+    });
+};
+
 var storage = new Storage();
 storage.add('A New Car!');
 storage.add('Bluetooth Headset');
@@ -36,6 +47,19 @@ app.post('/items', jsonParser, function(req, res) {
 
     var item = storage.add(req.body.name);
     res.status(201).json(item);
+});
+
+app.delete('/items/:id', function(req, res){
+    // storage.({
+    //     id: req.params.id
+    // });
+
+    console.log(req.body);
+    var id = req.params.id;
+    storage.removeitem(id);
+
+    res.status(200).json(storage.items);
+
 });
 
 
