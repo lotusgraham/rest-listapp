@@ -8,23 +8,34 @@ var Storage = function() {
 Storage.prototype.add = function(name) {
     var item = {
         name: name,
-         id: this.id
-     };
+        id: this.id
+    };
     this.items.push(item);
     this.id += 1;
     return item;
 };
 
-Storage.prototype.removeitem = function (id){
-    this.items.forEach(function(item){
+Storage.prototype.removeitem = function(id) {
+    this.items.forEach(function(item) {
         if (item.id === parseInt(id, 10)) {
             console.log(item);
             var index = storage.items.indexOf(item);
-
             storage.items.splice(index, 1);
         }
     });
 };
+
+Storage.prototype.editItem = function(requestObj) {
+    console.log("Edit item method argument: ", requestObj);
+    this.items.forEach(function(item) {
+        if (item.id === requestObj.id) {
+            console.log("Storage Item Before: ", item);
+            item.name = requestObj.name;
+            console.log("Storage Item After: ", item);
+        }
+    });
+
+}
 
 var storage = new Storage();
 storage.add('A New Car!');
@@ -49,19 +60,16 @@ app.post('/items', jsonParser, function(req, res) {
     res.status(201).json(item);
 });
 
-app.delete('/items/:id', function(req, res){
-    // storage.({
-    //     id: req.params.id
-    // });
-
-    console.log(req.body);
+app.delete('/items/:id', function(req, res) {
     var id = req.params.id;
     storage.removeitem(id);
-
     res.status(200).json(storage.items);
-
 });
 
-
+app.put('/items/:id', jsonParser, function(req, res) {
+    console.log("Request Body: ", req.body);
+    storage.editItem(req.body);
+    res.status(200);
+});
 
 app.listen(process.env.PORT || 8080);
