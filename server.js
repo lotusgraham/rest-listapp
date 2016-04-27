@@ -22,9 +22,20 @@ storage.add('Macbook Air');
 
 var app = express();
 app.use(express.static('public'));
+var bodyParser = require('body-parser');
+var jsonParser = bodyParser.json();
 
 app.get('/items', function(req, res) {
     res.json(storage.items);
+});
+
+app.post('/items', jsonParser, function(req, res) {
+    if (!req.body) {
+        return res.sendStatus(400);
+    }
+
+    var item = storage.add(req.body.name);
+    res.status(201).json(item);
 });
 
 
