@@ -35,7 +35,7 @@ Storage.prototype.editItem = function(requestObj) {
         }
     });
 
-}
+};
 
 var storage = new Storage();
 storage.add('A New Car!');
