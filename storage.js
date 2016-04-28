@@ -1,5 +1,6 @@
 module.exports = Storage; // this now means we can export our Storage contsrutor anywhere in our app.
-function Storage() {  // had to change the was the constructor was defined. exports doesn't seem to like var Storage = function();
+function Storage(name) {  // had to change the was the constructor was defined. exports doesn't seem to like var Storage = function();
+    this.name = "";
     this.items = [];
     this.id = 0;
 };
