@@ -104,7 +104,7 @@ ShoppingList.prototype.onGetItemsDone = function(items) {
 };
 ShoppingList.prototype.updateItemsView = function() {
     var context = {
-        items: this.items
+        items: this.items,
     };
     var itemList = $(this.itemListTemplate(context));
     this.itemList.replaceWith(itemList);

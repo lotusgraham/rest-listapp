@@ -19,13 +19,14 @@
             <h1>Shopping List</h1>
             <input type="text" placeholder="Add an item" id="item-input"
                 autocomplete="off" autofocus>
+            <h2 class="list-name"></h2>
             <ul id="item-list"></ul>
             <p class="light">Double-click to edit items</p>
         </div>
-
         <!-- Handlebars templates -->
         <script id="item-list-template" type="text/x-handlebars-template">
             <ul id="item-list">
+
                 {{#each items}}
                 <li data-id="{{ id }}{{ _id }}">
                     <div class="display">
