@@ -1,5 +1,5 @@
-module.exports = Storage; // this now means we can export our Storage contsrutor anywhere in our app. 
-function Storage() {
+module.exports = Storage; // this now means we can export our Storage contsrutor anywhere in our app.
+function Storage() {  // had to change the was the constructor was defined. exports doesn't seem to like var Storage = function();
     this.items = [];
     this.id = 0;
 };
@@ -15,7 +15,7 @@ Storage.prototype.add = function(name) {
 };
 
 Storage.prototype.remove = function(id) {
-    var that = this; // storing current context of 'this' (the storage object) as it changes inside the forEach loop to the specific item the loop has stopped on.
+    var that = this; // storing current context of 'this' (the storage object) as it changes inside the forEach loop to the specific item the loop is on at that time.
     this.items.forEach(function(item) {
         if (item.id === parseInt(id, 10)) {
             var index = that.items.indexOf(item); // 'that' refers to the storage obj as noted above.
